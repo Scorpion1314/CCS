@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController instance;
+
     [Header("Settings")]
     public Transform cameraTransform;
-
+    public Transform followTransform;
+    
     [Header("Properties")]
     [Header("Movement")]
     // The speed of the camera movement
@@ -16,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     // The time taken for camera to move
     public float movementTime;
-
+    
     // The position of the camera
     private Vector3 newPosition;
 
@@ -34,6 +37,9 @@ public class CameraController : MonoBehaviour
     public Vector3 zoomAmount;
     private Vector3 newZoom;
 
+    // The amount of limit for zooming
+    public float a, Max, Min;
+
     [Header("Drag")]
     // The position when dragging
     public Vector3 dragStartPosition;
@@ -42,6 +48,8 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        instance= this;
+
         newPosition = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;
@@ -50,16 +58,41 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        HandleMouseInput();
-        HandleMovementInput();
+        // To check whether the camera is focused on something
+        if(followTransform != null)
+        {
+            transform.position = followTransform.position;
+        }
+        else
+        {
+            HandleMouseInput();
+            HandleMovementInput();
+        }
+
+        // To unfocus
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            followTransform = null;
+        }
     }
 
     private void HandleMouseInput()
     {
         // To detect mouse scroll wheel to zoom
-        if (Input.mouseScrollDelta.y != 0)
+        if(Input.mouseScrollDelta.y != 0)
         {
-            newZoom += Input.mouseScrollDelta.y * zoomAmount;
+            //newZoom += Input.mouseScrollDelta.y * zoomAmount;
+
+            a += Input.mouseScrollDelta.y;
+            if(a > Max)
+            {
+                a = Max;
+            }
+            else if (a < Min)
+            {
+                a = Min;
+            }
+            newZoom = a * zoomAmount;
         }
 
         // To detect if the LMB is clicked to drag
@@ -71,13 +104,13 @@ public class CameraController : MonoBehaviour
 
             float entry;
 
-            if (plane.Raycast(ray, out entry))
+            if(plane.Raycast(ray, out entry))
             {
                 dragStartPosition = ray.GetPoint(entry);
             }
         }
 
-        if (Input.GetMouseButton(0))
+        if(Input.GetMouseButton(0))
         {
             Plane plane = new Plane(Vector3.up, Vector3.zero);
 
@@ -85,7 +118,7 @@ public class CameraController : MonoBehaviour
 
             float entry;
 
-            if (plane.Raycast(ray, out entry))
+            if(plane.Raycast(ray, out entry))
             {
                 dragCurrentPosition = ray.GetPoint(entry);
 
@@ -94,11 +127,11 @@ public class CameraController : MonoBehaviour
         }
 
         // To detect the RMB is clicked to rotate
-        if (Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1))
         {
             rotateStartPosition = Input.mousePosition;
         }
-        if (Input.GetMouseButton(1))
+        if(Input.GetMouseButton(1))
         {
             rotateCurrentPosition = Input.mousePosition;
 
@@ -113,7 +146,7 @@ public class CameraController : MonoBehaviour
     private void HandleMovementInput()
     {
         // Determine whether the shift key is pressed to increase the speed of the camera movement
-        if (Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift))
         {
             movementSpeed = fastSpeed;
         }
@@ -123,21 +156,21 @@ public class CameraController : MonoBehaviour
         }
 
         // Forward and Backward movement of the camera
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             newPosition += transform.forward * movementSpeed;
         }
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
             newPosition += transform.forward * -movementSpeed;
         }
 
         // Left and Right movement of the camera
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             newPosition += transform.right * -movementSpeed;
         }
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             newPosition += transform.right * movementSpeed;
         }
