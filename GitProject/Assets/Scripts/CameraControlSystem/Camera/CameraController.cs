@@ -38,12 +38,12 @@ public class CameraController : MonoBehaviour
     private Vector3 newZoom;
 
     // The amount of limit for zooming
-    public float a, Max, Min;
+    public float minZoom, maxZoom;
 
-    [Header("Drag")]
+    //[Header("Drag")]
     // The position when dragging
-    public Vector3 dragStartPosition;
-    public Vector3 dragCurrentPosition;
+    // public Vector3 dragStartPosition;
+    // public Vector3 dragCurrentPosition;
 
     // Start is called before the first frame update
     private void Start()
@@ -81,50 +81,41 @@ public class CameraController : MonoBehaviour
         // To detect mouse scroll wheel to zoom
         if(Input.mouseScrollDelta.y != 0)
         {
-            //newZoom += Input.mouseScrollDelta.y * zoomAmount;
-
-            a += Input.mouseScrollDelta.y;
-            if(a > Max)
-            {
-                a = Max;
-            }
-            else if (a < Min)
-            {
-                a = Min;
-            }
-            newZoom = a * zoomAmount;
+            newZoom += Input.mouseScrollDelta.y * zoomAmount;
+            newZoom.y = Mathf.Clamp(newZoom.y, minZoom, maxZoom);
+            newZoom.z = Mathf.Clamp(newZoom.z, minZoom, maxZoom);
         }
 
         // To detect if the LMB is clicked to drag
-        if (Input.GetMouseButtonDown(0))
-        {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Plane plane = new Plane(Vector3.up, Vector3.zero);
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            float entry;
+        //     float entry;
 
-            if(plane.Raycast(ray, out entry))
-            {
-                dragStartPosition = ray.GetPoint(entry);
-            }
-        }
+        //     if(plane.Raycast(ray, out entry))
+        //     {
+        //         dragStartPosition = ray.GetPoint(entry);
+        //     }
+        // }
 
-        if(Input.GetMouseButton(0))
-        {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
+        // if(Input.GetMouseButton(0))
+        // {
+        //     Plane plane = new Plane(Vector3.up, Vector3.zero);
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            float entry;
+        //     float entry;
 
-            if(plane.Raycast(ray, out entry))
-            {
-                dragCurrentPosition = ray.GetPoint(entry);
+        //     if(plane.Raycast(ray, out entry))
+        //     {
+        //         dragCurrentPosition = ray.GetPoint(entry);
 
-                newPosition = transform.position + dragStartPosition - dragCurrentPosition;
-            }
-        }
+        //         newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+        //     }
+        // }
 
         // To detect the RMB is clicked to rotate
         if(Input.GetMouseButtonDown(1))
