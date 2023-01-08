@@ -67,6 +67,8 @@ public class PlaceableObject : MonoBehaviour
         ObjectDrag Drag = gameObject.GetComponent<ObjectDrag>();
         Destroy(Drag);
 
+        BuildingController BController = gameObject.AddComponent<BuildingController>();
+
         Placed = true;
     }
 }
