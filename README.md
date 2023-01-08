@@ -21,8 +21,8 @@ Camera Control System (CCS)
 - Scroll the scroll wheel to zoom the camera. Scroll up to zoom in and vice versa.
 3) Rotate
 - Click and hold the right mouse button (RMB) and move around using mouse to rotate the view of the camera.
-4) Focus
-- Left click on top of any building (3D object) to focus on it.
+4) Select Object
+- click on the object with LMB to focus on it. Press "ESC" button to unfocus the camera
 5) Rotate (Focus)
 - Right click while focus on the object to rotate the camera around it.
 
