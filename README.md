@@ -40,6 +40,6 @@ Dashboard UI
 2) Resize
 - Left click and hold the bottom right of a window to resize it.
 3) Dropdown Menu
-User can select available building to be focus on.
+- User can select available building to be focus on.
 4) Building Info
-User can see the building info (the name of building, the position of building) on a window UI.
+- User can see the building info (the name of building, the position of building) on a window UI.
