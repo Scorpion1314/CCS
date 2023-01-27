@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4461654461421395084}
   - component: {fileID: 2449113632227655648}
   - component: {fileID: 3879445843893449612}
-  - component: {fileID: 6220313848786145911}
   m_Layer: 0
   m_Name: SphereBuilding
   m_TagString: Building
@@ -60,19 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0740e264a5b1eb7489811c2467cd11ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6220313848786145911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440639437205209037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d88756ed22b7974097b08c780a79fbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!1 &8613329479320577581
 GameObject:
   m_ObjectHideFlags: 0
