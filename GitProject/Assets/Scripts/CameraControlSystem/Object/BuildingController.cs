@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BuildingController : MonoBehaviour
 {
-    public float speed;
+    public float speed = 5.0f;
 
     // Update is called once per frame
     public void Update()

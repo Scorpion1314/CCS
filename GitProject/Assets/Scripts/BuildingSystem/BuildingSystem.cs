@@ -21,6 +21,10 @@ public class BuildingSystem : MonoBehaviour
     public GameObject cube;
     public GameObject sphere;
 
+    // Variable for building (in this case Houses)
+    public GameObject House1;
+    public GameObject House2;
+
     private PlaceableObject objectToPlace;
 
     private void Awake()
@@ -38,6 +42,14 @@ public class BuildingSystem : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             InitializeWithObject(sphere);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            InitializeWithObject(House1);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            InitializeWithObject(House2);
         }
 
         if(!objectToPlace)
