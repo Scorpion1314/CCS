@@ -35,12 +35,14 @@ public class ShowList : MonoBehaviour
             // Debug.Log("Building " + (i+1) + "'s position is " + BuildingList[i].transform.position);
         //}
 
-        PopulateDropDown(mydropdown, GetList.getlist.BuildingList);
+        //PopulateDropDown(mydropdown, GetList.getlist.BuildingList);
     }
 
     // Update is called once per frame
-    private void Update()
+    private void LateUpdate()
     {
+        PopulateDropDown(mydropdown, GetList.getlist.BuildingList);
+
         mydropdown.onValueChanged.AddListener(delegate {
             DropdownValueChanged(mydropdown);
         });

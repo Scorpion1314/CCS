@@ -14,7 +14,7 @@ public class GetList : MonoBehaviour
         getlist = this;
         
         // Find buildings (3d objects) with the tag "Building"
-        BuildingList = GameObject.FindGameObjectsWithTag("Building");
+        // BuildingList = GameObject.FindGameObjectsWithTag("Building");
     }
     // Start is called before the first frame update
     private void Start()
@@ -23,14 +23,14 @@ public class GetList : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void LateUpdate()
+    private void Update()
     {
-        //UpdateList();
+        UpdateList();
     }
 
     private void UpdateList()
     {
         // Find buildings (3d objects) with the tag "Building"
-        // BuildingList = GameObject.FindGameObjectsWithTag("Building");
+        BuildingList = GameObject.FindGameObjectsWithTag("Building");
     }
 }
